@@ -1,0 +1,11 @@
+# Parent repo — Next.js app lives in ayushi-portfolio/
+[build]
+  base = "ayushi-portfolio"
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
