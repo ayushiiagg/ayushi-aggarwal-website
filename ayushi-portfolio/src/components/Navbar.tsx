@@ -49,13 +49,13 @@ export function Navbar() {
           <Link href="/" className="group flex items-center gap-2.5" aria-label="Home">
             <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-gradient-to-br from-[#0D1B4B] to-[#243580] shadow-md transition-transform duration-300 group-hover:scale-105">
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-sm font-bold text-white tracking-tight">AA</span>
+                <span className="font-display text-sm font-bold text-white tracking-tight">A</span>
               </div>
               <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent" />
             </div>
             <div className="hidden sm:block">
               <div className="font-display text-base font-semibold leading-none text-[#0D1B4B]">
-                Ayushi Aggarwal
+                Ayushi
               </div>
               <div className="mt-0.5 text-[10px] font-medium tracking-widest text-emerald-600 uppercase">
                 Analytics · AI
@@ -136,7 +136,7 @@ export function Navbar() {
             >
               <div className="flex h-[68px] items-center justify-between border-b border-[#0D1B4B]/8 px-5">
                 <div className="font-display text-base font-semibold text-[#0D1B4B]">
-                  Ayushi Aggarwal
+                  Ayushi
                 </div>
                 <button
                   onClick={() => setOpen(false)}

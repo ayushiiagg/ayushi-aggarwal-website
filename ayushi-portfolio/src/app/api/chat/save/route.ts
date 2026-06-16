@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, message: "Lead saved successfully." });
   } catch (error) {
-    console.error("[Dhruv] Save lead API error:", error);
+    console.error("[Ayushi] Save lead API error:", error);
     return NextResponse.json(
       { error: "Something went wrong while saving your details." },
       { status: 500 }

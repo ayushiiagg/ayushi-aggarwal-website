@@ -39,7 +39,7 @@ const QUICK_PROMPTS = [
 ];
 
 const STORAGE_KEYS = {
-  activeSession: "dhruv_active_session",
+  activeSession: "ayushi_active_session",
 } as const;
 
 type ActiveSession = {
@@ -93,6 +93,9 @@ function clearActiveSession() {
   localStorage.removeItem("dhruv_session_id");
   localStorage.removeItem("dhruv_visitor_profile");
   localStorage.removeItem("dhruv_lead_saved");
+  localStorage.removeItem("ayushi_session_id");
+  localStorage.removeItem("ayushi_visitor_profile");
+  localStorage.removeItem("ayushi_lead_saved");
 }
 
 function validateProfile(profile: VisitorProfile): OnboardingErrors {
@@ -124,11 +127,11 @@ function welcomeMessage(name: string): Message {
   return {
     id: "welcome",
     role: "assistant",
-    content: `Hi ${name.split(" ")[0]}! I'm Dhruv, Ayushi's AI assistant. Ask me about her education, skills, internships, certifications, or how to get in touch — I'm here to help.`,
+    content: `Hi ${name.split(" ")[0]}! I'm Ayushi, your portfolio AI assistant. Ask me about my education, skills, internships, certifications, or how to get in touch — I'm here to help.`,
   };
 }
 
-export function DhruvAssistant() {
+export function AyushiAssistant() {
   const [open, setOpen] = useState(false);
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [profile, setProfile] = useState<VisitorProfile>(EMPTY_PROFILE);
@@ -383,7 +386,7 @@ export function DhruvAssistant() {
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            aria-label="Open Dhruv AI Assistant"
+            aria-label="Open Ayushi AI Assistant"
           >
             <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
               <Bot className="h-5 w-5" />
@@ -396,7 +399,7 @@ export function DhruvAssistant() {
               <span className="block text-[10px] font-bold tracking-widest text-emerald-400/80 uppercase">
                 AI Assistant
               </span>
-              <span className="font-display text-base leading-none">Dhruv</span>
+              <span className="font-display text-base leading-none">Ayushi</span>
             </span>
           </motion.button>
         )}
@@ -412,7 +415,7 @@ export function DhruvAssistant() {
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
             role="dialog"
-            aria-label="Dhruv AI Assistant chat"
+            aria-label="Ayushi AI Assistant chat"
           >
             {/* Header */}
             <div className="relative shrink-0 border-b border-white/10 px-4 py-3.5">
@@ -423,7 +426,7 @@ export function DhruvAssistant() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
-                    <h2 className="font-display text-lg leading-tight text-white">Dhruv</h2>
+                    <h2 className="font-display text-lg leading-tight text-white">Ayushi</h2>
                     <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
                   </div>
                   <p className="truncate text-[11px] text-white/45">
@@ -482,7 +485,7 @@ export function DhruvAssistant() {
                   {onboardingFields.map(({ key, label, placeholder, type, icon: Icon }) => (
                     <div key={key} className="grid gap-1">
                       <label
-                        htmlFor={`dhruv-${key}`}
+                        htmlFor={`ayushi-${key}`}
                         className="text-[10px] font-bold tracking-widest text-white/40 uppercase"
                       >
                         {label}
@@ -491,7 +494,7 @@ export function DhruvAssistant() {
                         <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
                         <input
                           ref={key === "name" ? nameRef : undefined}
-                          id={`dhruv-${key}`}
+                          id={`ayushi-${key}`}
                           type={type}
                           value={profile[key]}
                           onChange={(e) => updateProfile(key, e.target.value)}
@@ -525,7 +528,7 @@ export function DhruvAssistant() {
                       </>
                     ) : (
                       <>
-                        Start Chat with Dhruv
+                        Start Chat with Ayushi
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                       </>
                     )}
@@ -558,7 +561,7 @@ export function DhruvAssistant() {
                       >
                         {msg.role === "assistant" && msg.id !== "welcome" && (
                           <span className="mb-1 block text-[10px] font-bold tracking-widest text-emerald-400/70 uppercase">
-                            Dhruv
+                            Ayushi
                           </span>
                         )}
                         {msg.content}
@@ -570,7 +573,7 @@ export function DhruvAssistant() {
                     <div className="flex justify-start">
                       <div className="flex items-center gap-2 rounded-2xl rounded-bl-md border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/50">
                         <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
-                        Dhruv is thinking…
+                        Ayushi is thinking…
                       </div>
                     </div>
                   )}

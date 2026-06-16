@@ -48,7 +48,7 @@ function doPost(e) {
 
 function doGet() {
   return jsonResponse({
-    status: "Dhruv chatbot webhook active",
+    status: "Ayushi chatbot webhook active",
     spreadsheetId: SPREADSHEET_ID,
   });
 }

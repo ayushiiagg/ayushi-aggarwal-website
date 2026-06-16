@@ -47,12 +47,12 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="relative h-11 w-11 overflow-hidden rounded-xl bg-gradient-to-br from-[#0D1B4B] to-[#243580] shadow-lg ring-1 ring-white/10">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-base font-bold text-white">AA</span>
+                  <span className="font-display text-base font-bold text-white">A</span>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent" />
               </div>
               <div>
-                <div className="font-display text-lg font-semibold text-white">Ayushi Aggarwal</div>
+                <div className="font-display text-lg font-semibold text-white">Ayushi</div>
                 <div className="text-[10px] font-medium tracking-widest text-emerald-400 uppercase">
                   Analytics · AI
                 </div>
@@ -128,7 +128,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 sm:flex-row">
           <div className="text-xs text-white/30">
-            © 2025 Ayushi Aggarwal · Built with{" "}
+            © 2025 Ayushi · Built with{" "}
             <span className="text-white/50">Next.js 16</span>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-white/30">

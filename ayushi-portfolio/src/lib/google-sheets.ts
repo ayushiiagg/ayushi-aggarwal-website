@@ -24,7 +24,7 @@ export async function saveLeadToGoogleSheet(entry: LeadEntry): Promise<SaveLeadR
 
   if (!webhookUrl) {
     if (process.env.NODE_ENV === "development") {
-      console.info("[Dhruv] Lead save skipped — configure GOOGLE_SHEETS_WEBHOOK_URL:", entry);
+      console.info("[Ayushi] Lead save skipped — configure GOOGLE_SHEETS_WEBHOOK_URL:", entry);
     }
     return {
       success: false,
@@ -57,7 +57,7 @@ export async function saveLeadToGoogleSheet(entry: LeadEntry): Promise<SaveLeadR
     }
 
     if (!response.ok || parsed.success === false) {
-      console.error("[Dhruv] Google Sheets webhook failed:", response.status, text);
+      console.error("[Ayushi] Google Sheets webhook failed:", response.status, text);
       return {
         success: false,
         error: parsed.error ?? "Failed to save to Google Sheets",
@@ -66,7 +66,7 @@ export async function saveLeadToGoogleSheet(entry: LeadEntry): Promise<SaveLeadR
 
     return { success: true, serialNo: parsed.serialNo };
   } catch (error) {
-    console.error("[Dhruv] Failed to save lead to Google Sheets:", error);
+    console.error("[Ayushi] Failed to save lead to Google Sheets:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Network error while saving",

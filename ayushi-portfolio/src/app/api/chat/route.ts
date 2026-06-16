@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { buildWebsiteContext, DHRUV_SYSTEM_PROMPT } from "@/lib/website-context";
+import { buildWebsiteContext, AYUSHI_SYSTEM_PROMPT } from "@/lib/website-context";
 
 export const runtime = "nodejs";
 
@@ -35,7 +35,7 @@ function fallbackReply(question: string): string {
     return "Ayushi Aggarwal is a Business Analytics & AI student based in Delhi NCR, open to internships and full-time roles. She combines IBM-backed business analytics with hands-on Generative AI and data science experience.";
   }
 
-  return "I'm Dhruv, Ayushi's portfolio assistant. I can help with her education, skills, internships, certifications, and how to get in touch. Try asking about her IBM internship, top skills, or contact details.";
+  return "I'm Ayushi, your portfolio assistant. I can help with education, skills, internships, certifications, and how to get in touch. Try asking about the IBM internship, top skills, or contact details.";
 }
 
 export async function POST(request: NextRequest) {
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
           messages: [
             {
               role: "system",
-              content: `${DHRUV_SYSTEM_PROMPT}\n${websiteContext}`,
+              content: `${AYUSHI_SYSTEM_PROMPT}\n${websiteContext}`,
             },
             ...messages.map((m) => ({
               role: m.role,
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (!aiResponse.ok) {
-        console.error("[Dhruv] OpenAI error:", aiResponse.status, await aiResponse.text());
+        console.error("[Ayushi] OpenAI error:", aiResponse.status, await aiResponse.text());
         reply = fallbackReply(lastUserMessage.content);
       } else {
         const completion = (await aiResponse.json()) as {
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ reply });
   } catch (error) {
-    console.error("[Dhruv] Chat API error:", error);
+    console.error("[Ayushi] Chat API error:", error);
     return NextResponse.json(
       { error: "Something went wrong. Please try again in a moment." },
       { status: 500 }

@@ -356,7 +356,7 @@ export function HeroSection() {
 
               {/* Bottom name strip */}
               <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/15 bg-[#08102e]/95 px-5 py-4 backdrop-blur-md">
-                <div className="font-display text-lg font-semibold text-white">Ayushi Aggarwal</div>
+                <div className="font-display text-lg font-semibold text-white">Ayushi</div>
                 <div className="mt-0.5 text-xs font-medium text-emerald-300">Business Analytics &amp; AI · SRM University</div>
               </div>
             </div>

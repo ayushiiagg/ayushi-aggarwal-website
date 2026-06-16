@@ -39,7 +39,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
    - **Build command:** `npm run build`
    - **Publish directory:** `.next` (handled by `@netlify/plugin-nextjs`)
 5. Add environment variables under **Site settings → Environment variables**:
-   - `GOOGLE_SHEETS_WEBHOOK_URL` — Apps Script webhook for Dhruv chatbot leads
+   - `GOOGLE_SHEETS_WEBHOOK_URL` — Apps Script webhook for Ayushi chatbot leads
    - `OPENAI_API_KEY` — optional, for full AI chat responses
    - `NEXT_PUBLIC_SITE_URL` — optional, e.g. `https://ayushiaggarwal.netlify.app`
 6. Deploy. Your site will be live at `https://<site-name>.netlify.app`

@@ -3,7 +3,7 @@ import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { DhruvAssistant } from "@/components/DhruvAssistant";
+import { AyushiAssistant } from "@/components/AyushiAssistant";
 import { Toaster } from "@/components/ui/sonner";
 import { getSiteUrl } from "@/lib/site";
 
@@ -22,18 +22,18 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ayushi Aggarwal · Business Analytics & AI",
-    template: "%s · Ayushi Aggarwal",
+    default: "Ayushi · Business Analytics & AI",
+    template: "%s · Ayushi",
   },
   description:
     "Second-year BBA student specializing in Business Analytics with IBM at SRM University Delhi NCR, passionate about leveraging AI and data science to solve real-world business problems.",
   metadataBase: new URL(siteUrl),
   openGraph: {
-    title: "Ayushi Aggarwal · Business Analytics & AI",
+    title: "Ayushi · Business Analytics & AI",
     description:
       "Recruiter-ready portfolio for Ayushi Aggarwal — Business Analytics, Generative AI, Data Science.",
     url: siteUrl,
-    siteName: "Ayushi Aggarwal",
+    siteName: "Ayushi",
     locale: "en_IN",
     type: "website",
   },
@@ -61,7 +61,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <DhruvAssistant />
+        <AyushiAssistant />
         <Toaster richColors closeButton />
       </body>
     </html>
