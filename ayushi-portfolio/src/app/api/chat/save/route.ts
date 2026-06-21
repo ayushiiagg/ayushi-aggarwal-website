@@ -51,7 +51,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ success: true, message: "Lead saved successfully." });
+    return NextResponse.json({
+      success: true,
+      saved: result.saved !== false,
+      skipped: result.skipped ?? false,
+      warning: result.warning,
+      message: result.saved === false ? "Chat started (sheet save pending)." : "Lead saved successfully.",
+    });
   } catch (error) {
     console.error("[Ayushi] Save lead API error:", error);
     return NextResponse.json(

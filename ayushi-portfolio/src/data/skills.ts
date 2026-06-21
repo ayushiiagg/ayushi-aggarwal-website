@@ -1,17 +1,17 @@
 import type { SkillCategory, SkillProficiency } from "@/data/types";
 
 export const coreCompetencies: SkillProficiency[] = [
-  { label: "Business Analytics", value: 88 },
-  { label: "Generative AI", value: 85 },
-  { label: "Data Science", value: 82 },
-  { label: "Machine Learning", value: 80 },
+  { label: "Business Analytics", value: 90 },
+  { label: "Generative AI", value: 80 },
+  { label: "Data Science", value: 75 },
+  { label: "Machine Learning", value: 85 },
 ];
 
 export const technicalProficiency: SkillProficiency[] = [
-  { label: "Python", value: 90 },
-  { label: "GenAI", value: 85 },
-  { label: "Analytics", value: 88 },
-  { label: "ML/DL", value: 80 },
+  { label: "Python", value: 60 },
+  { label: "GenAI", value: 75 },
+  { label: "Analytics", value: 90 },
+  { label: "ML/DL", value: 50 },
 ];
 
 export const skillCategories: SkillCategory[] = [

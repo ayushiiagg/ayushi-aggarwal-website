@@ -1,5 +1,6 @@
 import { Award } from "lucide-react";
 import { CertificationsGallery } from "@/components/CertificationsGallery";
+import { CertificationsSidebar } from "@/components/CertificationsSidebar";
 import { CertificationsCTA } from "@/components/CertificationsCTA";
 
 export const metadata = {
@@ -9,7 +10,7 @@ export const metadata = {
 export default function CertificationsPage() {
   return (
     <div className="bg-white">
-      <div className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6">
+      <div className="mx-auto w-full max-w-7xl px-4 py-14 md:px-6">
         <div className="flex items-start gap-3">
           <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20">
             <Award className="h-5 w-5" />
@@ -24,8 +25,14 @@ export default function CertificationsPage() {
           </div>
         </div>
 
-        <div className="mt-10">
-          <CertificationsGallery />
+        <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-start">
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <CertificationsSidebar />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h2 className="mb-5 font-display text-xl text-[#0D1B4B]">Featured Certifications</h2>
+            <CertificationsGallery />
+          </div>
         </div>
 
         {/* CTA */}

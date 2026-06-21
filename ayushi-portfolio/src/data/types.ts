@@ -56,3 +56,11 @@ export type Certificate = {
   pdf?: string;
 };
 
+export type CertificateCredential = {
+  id: number;
+  name: string;
+  dateLabel: string;
+  year: number;
+  isInternship?: boolean;
+};
+

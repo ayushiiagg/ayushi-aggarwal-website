@@ -129,10 +129,7 @@ export function HeroSection() {
 
       {/* ── Content ── */}
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-12 md:px-8 md:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14">
-
-          {/* ══ LEFT COLUMN ══ */}
-          <div className="flex flex-col">
+        <div className="flex flex-col">
 
             {/* Status pill */}
             <motion.div
@@ -150,8 +147,11 @@ export function HeroSection() {
               <span className="text-emerald-400/60">SRM University · IBM</span>
             </motion.div>
 
+            {/* ── NAME + PHOTO ── */}
+            <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-10 lg:gap-14">
+
             {/* ── HERO HEADING ── */}
-            <div className="perspective-[800px]">
+            <div className="perspective-[800px] min-w-0 flex-1 text-center md:text-left">
               {/* Eyebrow */}
               <motion.p
                 className="mb-3 text-xs font-bold tracking-[0.25em] text-emerald-400/70 uppercase"
@@ -179,7 +179,7 @@ export function HeroSection() {
                 {/* "AYUSHI" — giant, emerald accent */}
                 <span className="block overflow-hidden mt-1">
                   <motion.span
-                    className="block text-[clamp(4rem,12vw,9rem)] font-display text-white"
+                    className="block text-[clamp(3.5rem,11vw,8rem)] font-display text-white lg:text-[clamp(4rem,10vw,7.5rem)]"
                     initial={{ y: "100%", opacity: 0 }}
                     animate={{ y: "0%",   opacity: 1 }}
                     transition={{ duration: 0.75, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
@@ -201,7 +201,7 @@ export function HeroSection() {
                 {/* "AGGARWAL" — slightly smaller, navy-tinted */}
                 <span className="block overflow-hidden">
                   <motion.span
-                    className="block text-[clamp(3.5rem,10vw,8rem)] text-white/80"
+                    className="block text-[clamp(3rem,9vw,7rem)] text-white/80 lg:text-[clamp(3.5rem,8vw,6.5rem)]"
                     initial={{ y: "100%", opacity: 0 }}
                     animate={{ y: "0%",   opacity: 1 }}
                     transition={{ duration: 0.75, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
@@ -210,6 +210,58 @@ export function HeroSection() {
                   </motion.span>
                 </span>
               </h1>
+            </div>
+
+            {/* ── PORTRAIT — beside name ── */}
+            <motion.div
+              className="relative shrink-0"
+              initial={{ opacity: 0, scale: 0.88, x: 24 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Ambient glow */}
+              <div className="absolute -inset-6 rounded-[36px] bg-gradient-to-br from-emerald-500/30 via-emerald-400/10 to-[#F59E0B]/20 blur-2xl" />
+
+              {/* Spinning accent ring */}
+              <motion.div
+                className="absolute -inset-4 rounded-[34px] border border-dashed border-emerald-400/25"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              />
+
+              {/* Gradient border frame */}
+              <div className="relative rounded-[28px] bg-gradient-to-br from-emerald-400/60 via-white/20 to-[#F59E0B]/50 p-[3px] shadow-[0_28px_72px_rgba(0,0,0,0.50)]">
+                <div className="relative overflow-hidden rounded-[25px] bg-[#08102e]">
+                  <Image
+                    src="/profile-photo.png"
+                    alt="Ayushi Aggarwal"
+                    width={600}
+                    height={750}
+                    priority
+                    className="h-[340px] w-[270px] scale-[1.07] object-cover object-[50%_7%] sm:h-[400px] sm:w-[315px] lg:h-[480px] lg:w-[375px]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08102e]/40 via-transparent to-emerald-500/5" />
+                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
+                </div>
+              </div>
+
+              {/* Floating stat chips */}
+              <StatChip
+                value="IBM" label="Generative AI Intern" sub="IBM Watson · 2025"
+                color="bg-gradient-to-br from-[#0D1B4B] to-[#1a2d6b]"
+                delay={0.9} className="-right-10 -top-2 hidden sm:flex"
+              />
+              <StatChip
+                value="3+" label="Programs" sub="SRM · BITSom · IIT"
+                color="bg-gradient-to-br from-emerald-500 to-emerald-600"
+                delay={1.1} className="-right-10 bottom-2 hidden md:flex"
+              />
+              <StatChip
+                value="7.78" label="CGPA" sub="SRM University"
+                color="bg-gradient-to-br from-[#F59E0B] to-amber-600"
+                delay={1.3} className="-left-10 top-1/2 hidden -translate-y-1/2 md:flex"
+              />
+            </motion.div>
             </div>
 
             {/* ── Subtitle bar ── */}
@@ -250,19 +302,22 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.95, ease: "easeOut" }}
             >
-              {tags.map((t, i) => (
-                <motion.div
-                  key={t.label}
-                  className="flex items-center gap-1.5 rounded-full border border-white/20 bg-[#0D1B4B]/50 px-3.5 py-1.5 text-xs font-semibold text-white/90 backdrop-blur-sm transition-all duration-200 hover:border-emerald-500/40 hover:bg-emerald-500/20 hover:text-emerald-200"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.0 + i * 0.07, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-                  whileHover={{ y: -2 }}
-                >
-                  <t.icon className="h-3.5 w-3.5" />
-                  {t.label}
-                </motion.div>
-              ))}
+              {tags.map((t, i) => {
+                const TagIcon = t.icon;
+                return (
+                  <motion.div
+                    key={t.label}
+                    className="flex items-center gap-1.5 rounded-full border border-white/20 bg-[#0D1B4B]/50 px-3.5 py-1.5 text-xs font-semibold text-white/90 backdrop-blur-sm transition-all duration-200 hover:border-emerald-500/40 hover:bg-emerald-500/20 hover:text-emerald-200"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.0 + i * 0.07, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                    whileHover={{ y: -2 }}
+                  >
+                    {TagIcon ? <TagIcon className="h-3.5 w-3.5" /> : null}
+                    {t.label}
+                  </motion.div>
+                );
+              })}
             </motion.div>
 
             {/* ── CTA buttons ── */}
@@ -299,85 +354,26 @@ export function HeroSection() {
             >
               <span className="text-[10px] font-bold tracking-[0.2em] text-white/55 uppercase">Connect</span>
               <div className="h-px w-6 bg-white/15" />
-              {socials.map((s, i) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/6 text-white/50 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:bg-emerald-500/15 hover:text-emerald-300"
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.3 + i * 0.08, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-                  whileHover={{ y: -3 }}
-                >
-                  <s.icon className="h-4 w-4" />
-                </motion.a>
-              ))}
+              {socials.map((s, i) => {
+                const SocialIcon = s.icon;
+                if (!SocialIcon) return null;
+
+                return (
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/6 text-white/50 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:bg-emerald-500/15 hover:text-emerald-300"
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.3 + i * 0.08, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                    whileHover={{ y: -3 }}
+                  >
+                    <SocialIcon className="h-4 w-4" />
+                  </motion.a>
+                );
+              })}
             </motion.div>
-          </div>
-
-          {/* ══ RIGHT COLUMN — PHOTO ══ */}
-          <motion.div
-            className="relative mt-4 lg:mt-8"
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Outer glow ring */}
-            <div className="absolute -inset-6 rounded-[40px] bg-gradient-to-br from-emerald-500/25 via-transparent to-[#F59E0B]/15 blur-2xl" />
-
-            {/* Spinning dashed rings */}
-            <motion.div
-              className="absolute -inset-10 rounded-full border border-dashed border-emerald-500/20"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div
-              className="absolute -inset-20 rounded-full border border-dashed border-white/6"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
-            />
-
-            {/* Photo frame */}
-            <div className="relative overflow-hidden rounded-[28px] border border-white/20 shadow-[0_40px_100px_rgba(0,0,0,0.50)]">
-              <Image
-                src="/profile-photo.jpg"
-                alt="Ayushi Aggarwal"
-                width={820}
-                height={980}
-                priority
-                className="relative z-0 h-[420px] w-full object-cover md:h-[520px]"
-              />
-
-              {/* Depth overlays — sit above image only, below caption */}
-              <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#08102e]/85 via-[#08102e]/15 to-transparent" />
-              <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-br from-emerald-500/8 via-transparent to-[#F59E0B]/6" />
-              <div className="pointer-events-none absolute inset-0 z-[1] ring-1 ring-inset ring-white/15" />
-
-              {/* Bottom name strip */}
-              <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/15 bg-[#08102e]/95 px-5 py-4 backdrop-blur-md">
-                <div className="font-display text-lg font-semibold text-white">Ayushi</div>
-                <div className="mt-0.5 text-xs font-medium text-emerald-300">Business Analytics &amp; AI · SRM University</div>
-              </div>
-            </div>
-
-            {/* Floating stat chips */}
-            <StatChip
-              value="IBM" label="Generative AI Intern" sub="IBM Watson · 2025"
-              color="bg-gradient-to-br from-[#0D1B4B] to-[#1a2d6b]"
-              delay={0.9} className="right-3 top-5"
-            />
-            <StatChip
-              value="3+" label="Programs" sub="SRM · BITSom · IIT"
-              color="bg-gradient-to-br from-emerald-500 to-emerald-600"
-              delay={1.1} className="-left-5 bottom-28"
-            />
-            <StatChip
-              value="7.78" label="CGPA" sub="SRM University"
-              color="bg-gradient-to-br from-[#F59E0B] to-amber-600"
-              delay={1.3} className="right-3 bottom-24"
-            />
-          </motion.div>
         </div>
 
         {/* ── Marquee strip ── */}

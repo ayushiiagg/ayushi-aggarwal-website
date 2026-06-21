@@ -1,19 +1,3 @@
-// Ayushi chatbot — paste THIS ENTIRE FILE into Google Apps Script → Code.gs
-// Your project: https://script.google.com/home/projects/1T-hlvgqG0e8R5iN7vcQdS7wRCFK9a7rj0ZVIiyDSN_o4bf2TLD_oXXwG/edit
-//
-// Steps:
-// 1. Open the link above
-// 2. Select all in Code.gs → Delete → Paste everything from line 14 below
-// 3. Save → Run testWebhook → Authorize (see "Unverified app" note below)
-// 4. Deploy → New deployment → Web app (Me, Anyone) → copy /exec URL to .env.local
-//
-// If Google shows "Google hasn't verified this app":
-// - This is YOUR script on YOUR account — safe to continue.
-// - Click Advanced → Go to Ayushi chatbot (unsafe) → Allow.
-// - Or: script.google.com → Project Settings → copy GCP project number
-//   → console.cloud.google.com → OAuth consent screen → Testing
-//   → add aggarwalayushi545@gmail.com as Test user → Save.
-
 var SPREADSHEET_ID = "1oHQ18bpspyIA2JfZhLJF44aDCd6GFk-PNBL8zTYrT-Q";
 var NOTIFY_EMAIL = "aggarwalayushi545@gmail.com";
 
@@ -107,7 +91,7 @@ function testWebhook() {
         sessionId: "apps-script-test",
         fullName: "Apps Script Test",
         phoneNumber: "9999999999",
-        emailId: "test@example.com",
+        emailId: "test@example.com"
       }),
     },
   };

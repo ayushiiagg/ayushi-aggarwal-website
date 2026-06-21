@@ -20,6 +20,11 @@
 # production
 /build
 
+# pm2
+.pm2/
+logs/
+.server.pid
+
 # misc
 .DS_Store
 *.pem

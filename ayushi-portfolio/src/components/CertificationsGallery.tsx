@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Eye, Award, X, ExternalLink } from "lucide-react";
+import { Download, Eye, Award, X, FileText } from "lucide-react";
 import { certificates } from "@/data/certificates";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
@@ -25,9 +25,11 @@ export function CertificationsGallery() {
 
   return (
     <>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2">
         {certificates.map((c, i) => {
           const style = cardColors[i % cardColors.length];
+          const hasImage = Boolean(c.image);
+          const hasPdf = Boolean(c.pdf);
           return (
             <Reveal key={c.id} delay={i * 0.06}>
               <motion.div
@@ -46,13 +48,37 @@ export function CertificationsGallery() {
                 {/* Thumbnail */}
                 <div className="relative overflow-hidden">
                   <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0D1B4B]/5 to-emerald-500/5">
-                    <Image
-                      src={c.image ?? "/certificates/placeholder.jpg"}
-                      alt={c.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    />
+                    {hasImage ? (
+                      <Image
+                        src={c.image!}
+                        alt={c.name}
+                        fill
+                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        unoptimized
+                      />
+                    ) : hasPdf ? (
+                      <>
+                        <iframe
+                          src={`${c.pdf}#toolbar=0&navpanes=0`}
+                          title={c.name}
+                          className="pointer-events-none absolute inset-0 h-full w-full scale-[1.02] bg-white"
+                        />
+                        <div className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 bg-[#0D1B4B]/75 px-3 py-1.5 text-[10px] font-semibold text-white">
+                          <FileText className="h-3 w-3" />
+                          PDF Certificate
+                        </div>
+                      </>
+                    ) : (
+                      <Image
+                        src="/certificates/placeholder.jpg"
+                        alt={c.name}
+                        fill
+                        className="object-contain p-2"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        unoptimized
+                      />
+                    )}
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0D1B4B]/50 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
                       <button
@@ -63,8 +89,10 @@ export function CertificationsGallery() {
                         <Eye className="h-4 w-4" />
                       </button>
                       <a
-                        href={c.pdf ?? "#"}
-                        download
+                        href={c.pdf ?? c.image ?? "#"}
+                        download={hasPdf ? true : undefined}
+                        target={hasPdf ? undefined : "_blank"}
+                        rel={hasPdf ? undefined : "noopener noreferrer"}
                         className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-lg transition hover:bg-emerald-600"
                         aria-label={`Download ${c.name}`}
                       >
@@ -99,14 +127,16 @@ export function CertificationsGallery() {
                       <Eye className="mr-1.5 h-3.5 w-3.5" />
                       View
                     </Button>
-                    <a
-                      href={c.pdf ?? "#"}
-                      download
-                      aria-label={`Download ${c.name}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#0D1B4B]/12 text-foreground/60 transition hover:border-emerald-500/30 hover:bg-emerald-500/8 hover:text-emerald-700"
-                    >
-                      <Download className="h-4 w-4" />
-                    </a>
+                    {hasPdf && (
+                      <a
+                        href={c.pdf}
+                        download
+                        aria-label={`Download ${c.name}`}
+                        className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#0D1B4B]/12 text-foreground/60 transition hover:border-emerald-500/30 hover:bg-emerald-500/8 hover:text-emerald-700"
+                      >
+                        <Download className="h-4 w-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -166,15 +196,16 @@ export function CertificationsGallery() {
               <div className="relative h-[65vh] bg-[#0D1B4B]/[0.02]">
                 {active?.pdf ? (
                   <iframe src={active.pdf} title={active.name} className="h-full w-full" />
-                ) : (
+                ) : active?.image ? (
                   <Image
-                    src={active?.image ?? "/certificates/placeholder.jpg"}
+                    src={active.image}
                     alt={active?.name ?? "Certificate"}
                     fill
                     className="object-contain p-8"
                     sizes="100vw"
+                    unoptimized
                   />
-                )}
+                ) : null}
               </div>
             </motion.div>
           </motion.div>

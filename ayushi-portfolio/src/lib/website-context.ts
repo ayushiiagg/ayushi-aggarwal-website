@@ -1,3 +1,4 @@
+import { certificateCredentials } from "@/data/certificate-credentials";
 import { certificates } from "@/data/certificates";
 import { education } from "@/data/education";
 import { experience } from "@/data/experience";
@@ -58,6 +59,10 @@ ${projects}`;
     .map((c) => `- ${c.name} — ${c.issuer} (${c.date})`)
     .join("\n");
 
+  const credsBlock = certificateCredentials
+    .map((c) => `- ${c.name} (${c.dateLabel})`)
+    .join("\n");
+
   const competencies = coreCompetencies
     .map((s) => `${s.label}: ${s.value}%`)
     .join(", ");
@@ -91,8 +96,8 @@ ${pages}
 
 ## Key Stats (Home page)
 - 3+ academic programs (SRM · BITSom · IIT Roorkee)
-- 4+ certifications (IBM · BITSom · IIT · more)
-- IBM Generative AI internship completed
+- 15+ certifications (IBM · Coursera · Forage · more)
+- 2 internships — IBM Generative AI (completed) · Vista Neotech Business Data Analyst (ongoing)
 - Strong academic performance at SRM University Delhi NCR
 
 ## Education
@@ -109,7 +114,11 @@ Categories:
 ${skillsBlock}
 
 ## Certifications
+Featured (with gallery images):
 ${certsBlock}
+
+Additional credentials (year-wise on /certifications sidebar):
+${credsBlock}
 
 ## AI Assistant Notes
 - You are "Ayushi", the portfolio AI assistant on this website.

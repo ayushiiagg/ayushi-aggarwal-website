@@ -136,11 +136,13 @@ export function AyushiAssistant() {
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [profile, setProfile] = useState<VisitorProfile>(EMPTY_PROFILE);
   const [onboardingErrors, setOnboardingErrors] = useState<OnboardingErrors>({});
+  const [onboardingFormError, setOnboardingFormError] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [submittingOnboarding, setSubmittingOnboarding] = useState(false);
   const [leadSaved, setLeadSaved] = useState(false);
+  const [leadSaveWarning, setLeadSaveWarning] = useState("");
   const [sessionId, setSessionId] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -156,7 +158,9 @@ export function AyushiAssistant() {
     setLoading(false);
     setSubmittingOnboarding(false);
     setLeadSaved(false);
+    setLeadSaveWarning("");
     setOnboardingErrors({});
+    setOnboardingFormError("");
     setSessionId("");
   }, []);
 
@@ -202,6 +206,10 @@ export function AyushiAssistant() {
     const newSessionId = createId();
     setSubmittingOnboarding(true);
     setOnboardingErrors({});
+    setOnboardingFormError("");
+
+    let savedToSheet = false;
+    let saveWarning = "";
 
     try {
       const response = await fetch("/api/chat/save", {
@@ -215,18 +223,25 @@ export function AyushiAssistant() {
         }),
       });
 
-      const data = (await response.json()) as { success?: boolean; error?: string };
+      const data = (await response.json()) as {
+        success?: boolean;
+        saved?: boolean;
+        warning?: string;
+        error?: string;
+      };
 
       if (!response.ok) {
         throw new Error(data.error ?? "Could not save your details");
       }
+
+      savedToSheet = data.saved !== false;
+      saveWarning = savedToSheet ? "" : (data.warning ?? "");
     } catch (error) {
-      setOnboardingErrors({
-        email:
-          error instanceof Error
-            ? error.message
-            : "Could not save your details. Please try again.",
-      });
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Could not save your details. Please try again.";
+      setOnboardingFormError(message);
       setSubmittingOnboarding(false);
       return;
     }
@@ -236,7 +251,8 @@ export function AyushiAssistant() {
     setProfile(trimmed);
     setSessionId(newSessionId);
     setOnboardingComplete(true);
-    setLeadSaved(true);
+    setLeadSaved(savedToSheet);
+    setLeadSaveWarning(saveWarning);
     setMessages(initialMessages);
     setSubmittingOnboarding(false);
 
@@ -245,7 +261,7 @@ export function AyushiAssistant() {
       profile: trimmed,
       messages: initialMessages,
       onboardingComplete: true,
-      leadSaved: true,
+      leadSaved: savedToSheet,
     });
   };
 
@@ -482,6 +498,11 @@ export function AyushiAssistant() {
                 </div>
 
                 <form onSubmit={handleStartChat} className="flex flex-1 flex-col gap-3">
+                  {onboardingFormError && (
+                    <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2.5 text-xs leading-relaxed text-red-300">
+                      {onboardingFormError}
+                    </p>
+                  )}
                   {onboardingFields.map(({ key, label, placeholder, type, icon: Icon }) => (
                     <div key={key} className="grid gap-1">
                       <label
@@ -607,6 +628,11 @@ export function AyushiAssistant() {
                   {leadSaved && (
                     <p className="mb-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2 text-center text-[11px] font-semibold text-emerald-300">
                       Your details are saved in Google Sheet
+                    </p>
+                  )}
+                  {!leadSaved && leadSaveWarning && (
+                    <p className="mb-2 rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-center text-[11px] leading-relaxed text-amber-200">
+                      Chat started, but your details were not saved to the sheet yet.
                     </p>
                   )}
                   <div className="flex items-end gap-2 rounded-xl border border-white/10 bg-white/5 p-2 focus-within:border-emerald-500/40 focus-within:ring-1 focus-within:ring-emerald-500/20">

@@ -24,7 +24,7 @@ const stats = [
   },
   {
     icon: Trophy,
-    value: 4,
+    value: 15,
     suffix: "+",
     label: "Certifications",
     sub: "IBM · BITSom · IIT · More",
@@ -40,11 +40,11 @@ const stats = [
   },
   {
     icon: Briefcase,
-    value: 1,
+    value: 2,
     suffix: "",
-    label: "Internship",
-    sub: "IBM Generative AI",
-    detail: "Hands-on Generative AI internship at IBM — working with Watson AI, LLMs, and enterprise analytics.",
+    label: "Internships",
+    sub: "IBM · Vista Neotech",
+    detail: "IBM Generative AI internship completed. Business Data Analyst internship at Vista Neotech Pvt. Ltd. — ongoing.",
     gradient: "from-sky-400 to-blue-600",
     bg: "from-sky-500/15 to-blue-600/5",
     border: "border-sky-500/30",
@@ -52,7 +52,7 @@ const stats = [
     iconBg: "bg-sky-500",
     ring: "ring-sky-400/30",
     bar: "#0EA5E9",
-    percent: 60,
+    percent: 80,
   },
   {
     icon: GraduationCap,
