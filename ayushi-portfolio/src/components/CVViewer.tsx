@@ -65,21 +65,21 @@ export function CVViewer() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            Curriculum Vitae · 2025
+            Curriculum Vitae · 2026
           </div>
 
           <h1 className="mt-5 font-display text-5xl tracking-tight text-white md:text-6xl">
             Ayushi <span className="text-emerald-400">Aggarwal</span>
           </h1>
           <p className="mt-3 text-base text-white/50 md:text-lg">
-            Business Analytics &amp; AI Specialist &nbsp;·&nbsp; IBM Generative AI Intern &nbsp;·&nbsp; Data-Driven Strategist
+            IBM Generative AI Intern &nbsp;·&nbsp; Vista Neotech Data Analyst Intern
           </p>
 
           {/* Credential strip */}
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             {[
               { label: "IBM Generative AI Intern",        accent: "text-emerald-400" },
-              { label: "8.5 CGPA · SRM University",       accent: "text-amber-400" },
+              { label: "8.24 SGPA · 7.90 CGPA · SRM",     accent: "text-amber-400" },
               { label: "Distinction · BITSom",            accent: "text-teal-400" },
               { label: "IIT Roorkee · AI & Data Science", accent: "text-sky-400" },
             ].map((item, i) => (
